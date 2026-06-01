@@ -244,6 +244,126 @@
             .tabs { flex-wrap: wrap; }
             .tab { min-width: 30%; }
         }
+
+        /* ===== 饮食日记样式 ===== */
+        .diary-section { display: none; }
+        .diary-section.active { display: block; }
+
+        .diary-form { margin-top: 10px; }
+        .form-group { margin-bottom: 18px; }
+        .form-label {
+            display: block; font-size: 14px; font-weight: 500;
+            color: #333; margin-bottom: 8px;
+        }
+        .form-input {
+            width: 100%; padding: 12px 14px; border: 2px solid #e0e0e0;
+            border-radius: 10px; font-size: 15px; outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-input:focus { border-color: #667eea; }
+        .form-textarea {
+            width: 100%; min-height: 80px; padding: 12px 14px;
+            border: 2px solid #e0e0e0; border-radius: 10px;
+            font-size: 15px; outline: none; resize: vertical;
+            transition: border-color 0.3s;
+        }
+        .form-textarea:focus { border-color: #667eea; }
+
+        .symptom-options { display: flex; gap: 8px; flex-wrap: wrap; }
+        .symptom-option {
+            flex: 1; min-width: 70px; padding: 12px 8px;
+            border: 2px solid #e0e0e0; border-radius: 10px;
+            text-align: center; font-size: 13px; cursor: pointer;
+            transition: all 0.2s; background: white;
+        }
+        .symptom-option:hover { border-color: #667eea; }
+        .symptom-option.selected {
+            border-color: #667eea; background: #f0f4ff;
+            color: #667eea; font-weight: 500;
+        }
+
+        .fart-counter {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .counter-btn {
+            width: 44px; height: 44px; border: 2px solid #667eea;
+            border-radius: 50%; background: white; font-size: 24px;
+            color: #667eea; cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .counter-btn:hover { background: #667eea; color: white; }
+        .counter-btn:active { transform: scale(0.95); }
+        .counter-value {
+            font-size: 32px; font-weight: 700; color: #333;
+            min-width: 50px; text-align: center;
+        }
+        .counter-label { font-size: 14px; color: #888; }
+
+        .diary-entry {
+            background: #f8f9fa; border-radius: 12px; padding: 15px;
+            margin-bottom: 12px; border-left: 4px solid #667eea;
+        }
+        .diary-entry-header {
+            display: flex; justify-content: space-between;
+            align-items: center; margin-bottom: 10px;
+        }
+        .diary-entry-date {
+            font-size: 15px; font-weight: 600; color: #333;
+        }
+        .diary-entry-delete {
+            background: none; border: none; color: #dc3545;
+            font-size: 20px; cursor: pointer; padding: 4px 8px;
+            border-radius: 6px; transition: background 0.2s;
+        }
+        .diary-entry-delete:hover { background: #fee2e2; }
+        .diary-entry-food {
+            font-size: 14px; color: #555; margin-bottom: 8px;
+            line-height: 1.5;
+        }
+        .diary-entry-symptoms {
+            display: flex; gap: 15px; flex-wrap: wrap;
+        }
+        .symptom-tag {
+            font-size: 13px; padding: 4px 10px; border-radius: 15px;
+            background: #e9ecef; color: #555;
+        }
+        .symptom-tag.bloating-0 { background: #d4edda; color: #155724; }
+        .symptom-tag.bloating-1 { background: #fff3cd; color: #856404; }
+        .symptom-tag.bloating-2 { background: #ffe8cc; color: #9a6700; }
+        .symptom-tag.bloating-3 { background: #f8d7da; color: #721c24; }
+
+        .diary-note {
+            font-size: 13px; color: #888; margin-top: 8px;
+            font-style: italic;
+        }
+
+        .chart-container {
+            display: flex; flex-direction: column; gap: 15px;
+        }
+        .chart-row {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .chart-label {
+            min-width: 60px; font-size: 13px; color: #666;
+        }
+        .chart-bar-bg {
+            flex: 1; height: 24px; background: #e9ecef;
+            border-radius: 12px; overflow: hidden; position: relative;
+        }
+        .chart-bar {
+            height: 100%; border-radius: 12px; transition: width 0.5s ease;
+        }
+        .chart-bar.bloating { background: linear-gradient(90deg, #28a745, #ffc107, #dc3545); }
+        .chart-bar.fart { background: linear-gradient(90deg, #667eea, #764ba2); }
+        .chart-value {
+            min-width: 40px; font-size: 13px; color: #333;
+            text-align: right; font-weight: 500;
+        }
+
+        .empty-diary {
+            text-align: center; padding: 30px; color: #999;
+        }
+        .empty-diary-icon { font-size: 48px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -264,6 +384,7 @@
             <div class="tab active" onclick="switchTab('food', this)">食物查询</div>
             <div class="tab" onclick="switchTab('recipe', this)">食谱评估</div>
             <div class="tab" onclick="switchTab('calorie', this)">热量查询</div>
+            <div class="tab" onclick="switchTab('diary', this)">饮食日记</div>
         </div>
 
         <!-- ====== 食物查询 ====== -->
@@ -368,6 +489,62 @@
             <div class="content-card">
                 <div class="section-title"><span>📊</span><span>常见食物热量排行</span></div>
                 <div id="calorieRankContainer"></div>
+            </div>
+        </div>
+
+        <!-- ====== 饮食日记 ====== -->
+        <div id="diaryTab" class="diary-section">
+            <div class="content-card">
+                <div class="section-title"><span>📝</span><span>添加今日记录</span></div>
+                
+                <div class="diary-form">
+                    <div class="form-group">
+                        <label class="form-label">📅 日期</label>
+                        <input type="date" class="form-input" id="diaryDate">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">🍽️ 今天吃了什么</label>
+                        <textarea class="form-textarea" id="diaryFood" placeholder="记录今天吃的食物，用逗号分隔&#10;例如：小米粥, 鸡胸肉, 胡萝卜, 清蒸鱼"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">🫃 腹胀程度</label>
+                        <div class="symptom-options" id="bloatingOptions">
+                            <div class="symptom-option" data-value="0" onclick="selectSymptom('bloating', 0, this)">😊 无</div>
+                            <div class="symptom-option" data-value="1" onclick="selectSymptom('bloating', 1, this)">😐 轻度</div>
+                            <div class="symptom-option" data-value="2" onclick="selectSymptom('bloating', 2, this)">😕 中度</div>
+                            <div class="symptom-option" data-value="3" onclick="selectSymptom('bloating', 3, this)">😫 重度</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">💨 放屁次数</label>
+                        <div class="fart-counter">
+                            <button class="counter-btn" onclick="adjustFart(-1)">−</button>
+                            <span class="counter-value" id="fartCount">0</span>
+                            <button class="counter-btn" onclick="adjustFart(1)">+</button>
+                            <span class="counter-label">次/天</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">💬 备注（可选）</label>
+                        <textarea class="form-textarea" id="diaryNote" placeholder="记录其他症状或感受..." style="min-height: 60px;"></textarea>
+                    </div>
+                    
+                    <button class="check-btn" onclick="saveDiary()">💾 保存记录</button>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="section-title"><span>📊</span><span>历史记录</span></div>
+                <div id="diaryHistory"></div>
+            </div>
+            
+            <div class="content-card">
+                <div class="section-title"><span>📈</span><span>症状趋势（最近7天）</span></div>
+                <div id="diaryChart"></div>
             </div>
         </div>
     </div>
@@ -761,6 +938,8 @@ document.addEventListener('DOMContentLoaded', function() {
     renderFoodList(currentCategory);
     renderRecipeSuggestions();
     renderCalorieRank();
+    // 预加载日记数据
+    loadDiaryData();
 });
 
 // =============================================
@@ -774,6 +953,12 @@ function switchTab(tab, el) {
     document.getElementById('foodTab').style.display = tab === 'food' ? 'block' : 'none';
     document.getElementById('recipeTab').style.display = tab === 'recipe' ? 'block' : 'none';
     document.getElementById('calorieTab').style.display = tab === 'calorie' ? 'block' : 'none';
+    document.getElementById('diaryTab').style.display = tab === 'diary' ? 'block' : 'none';
+    
+    // 切换到日记页时初始化
+    if (tab === 'diary') {
+        initDiary();
+    }
 }
 
 // =============================================
@@ -1241,6 +1426,231 @@ function renderCalorieRank() {
             <div class="calorie-list-value">${f.calorie} kcal</div>
         </div>
     `).join('');
+}
+
+// =============================================
+// 饮食日记功能
+// =============================================
+let diaryData = [];
+let currentBloating = 0;
+let currentFartCount = 0;
+
+// 初始化日记
+function initDiary() {
+    // 设置今天日期
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('diaryDate').value = today;
+    
+    // 重置表单
+    currentBloating = 0;
+    currentFartCount = 0;
+    document.getElementById('fartCount').textContent = '0';
+    document.querySelectorAll('.symptom-option').forEach(opt => opt.classList.remove('selected'));
+    document.querySelector('.symptom-option[data-value="0"]').classList.add('selected');
+    
+    // 加载数据
+    loadDiaryData();
+    renderDiaryHistory();
+    renderDiaryChart();
+}
+
+// 加载本地存储数据
+function loadDiaryData() {
+    const saved = localStorage.getItem('siboDiary');
+    if (saved) {
+        diaryData = JSON.parse(saved);
+    } else {
+        diaryData = [];
+    }
+}
+
+// 保存到本地存储
+function saveDiaryData() {
+    localStorage.setItem('siboDiary', JSON.stringify(diaryData));
+}
+
+// 选择腹胀程度
+function selectSymptom(type, value, el) {
+    if (type === 'bloating') {
+        currentBloating = value;
+        document.querySelectorAll('#bloatingOptions .symptom-option').forEach(opt => {
+            opt.classList.remove('selected');
+        });
+        el.classList.add('selected');
+    }
+}
+
+// 调整放屁次数
+function adjustFart(delta) {
+    currentFartCount = Math.max(0, currentFartCount + delta);
+    document.getElementById('fartCount').textContent = currentFartCount;
+}
+
+// 保存日记
+function saveDiary() {
+    const date = document.getElementById('diaryDate').value;
+    const food = document.getElementById('diaryFood').value.trim();
+    const note = document.getElementById('diaryNote').value.trim();
+    
+    if (!date) {
+        alert('请选择日期');
+        return;
+    }
+    
+    if (!food) {
+        alert('请记录今天吃的食物');
+        return;
+    }
+    
+    // 检查是否已有该日期的记录
+    const existingIndex = diaryData.findIndex(d => d.date === date);
+    
+    const entry = {
+        date: date,
+        food: food,
+        bloating: currentBloating,
+        fartCount: currentFartCount,
+        note: note,
+        timestamp: new Date().toISOString()
+    };
+    
+    if (existingIndex >= 0) {
+        // 更新已有记录
+        if (confirm('该日期已有记录，是否覆盖？')) {
+            diaryData[existingIndex] = entry;
+        } else {
+            return;
+        }
+    } else {
+        // 添加新记录
+        diaryData.push(entry);
+    }
+    
+    // 按日期排序（最新的在前）
+    diaryData.sort((a, b) => new Date(b.date) - new Date(a.date));
+    
+    // 保存
+    saveDiaryData();
+    
+    // 清空表单
+    document.getElementById('diaryFood').value = '';
+    document.getElementById('diaryNote').value = '';
+    currentFartCount = 0;
+    document.getElementById('fartCount').textContent = '0';
+    
+    // 刷新显示
+    renderDiaryHistory();
+    renderDiaryChart();
+    
+    alert('✅ 记录保存成功！');
+}
+
+// 渲染历史记录
+function renderDiaryHistory() {
+    const container = document.getElementById('diaryHistory');
+    
+    if (diaryData.length === 0) {
+        container.innerHTML = `
+            <div class="empty-diary">
+                <div class="empty-diary-icon">📭</div>
+                <div>暂无记录，开始记录您的饮食吧！</div>
+            </div>
+        `;
+        return;
+    }
+    
+    const bloatingText = ['无', '轻度', '中度', '重度'];
+    
+    container.innerHTML = diaryData.map((entry, index) => `
+        <div class="diary-entry">
+            <div class="diary-entry-header">
+                <div class="diary-entry-date">📅 ${formatDate(entry.date)}</div>
+                <button class="diary-entry-delete" onclick="deleteDiary(${index})">🗑️</button>
+            </div>
+            <div class="diary-entry-food">🍽️ ${entry.food}</div>
+            <div class="diary-entry-symptoms">
+                <span class="symptom-tag bloating-${entry.bloating}">🫃 腹胀: ${bloatingText[entry.bloating]}</span>
+                <span class="symptom-tag">💨 放屁: ${entry.fartCount}次</span>
+            </div>
+            ${entry.note ? `<div class="diary-note">💬 ${entry.note}</div>` : ''}
+        </div>
+    `).join('');
+}
+
+// 删除记录
+function deleteDiary(index) {
+    if (confirm('确定要删除这条记录吗？')) {
+        diaryData.splice(index, 1);
+        saveDiaryData();
+        renderDiaryHistory();
+        renderDiaryChart();
+    }
+}
+
+// 渲染趋势图
+function renderDiaryChart() {
+    const container = document.getElementById('diaryChart');
+    
+    if (diaryData.length === 0) {
+        container.innerHTML = `
+            <div class="empty-diary">
+                <div class="empty-diary-icon">📊</div>
+                <div>记录数据后可查看症状趋势</div>
+            </div>
+        `;
+        return;
+    }
+    
+    // 获取最近7天的数据
+    const last7Days = diaryData.slice(0, 7);
+    
+    // 计算平均值
+    const avgBloating = last7Days.reduce((sum, d) => sum + d.bloating, 0) / last7Days.length;
+    const avgFart = last7Days.reduce((sum, d) => sum + d.fartCount, 0) / last7Days.length;
+    
+    // 最大值用于计算百分比
+    const maxFart = Math.max(...last7Days.map(d => d.fartCount), 10);
+    
+    container.innerHTML = `
+        <div class="chart-container">
+            <div style="font-size: 13px; color: #666; margin-bottom: 10px;">
+                共 ${last7Days.length} 天记录
+            </div>
+            <div class="chart-row">
+                <div class="chart-label">腹胀程度</div>
+                <div class="chart-bar-bg">
+                    <div class="chart-bar bloating" style="width: ${(avgBloating / 3) * 100}%"></div>
+                </div>
+                <div class="chart-value">${avgBloating.toFixed(1)}</div>
+            </div>
+            <div class="chart-row">
+                <div class="chart-label">放屁次数</div>
+                <div class="chart-bar-bg">
+                    <div class="chart-bar fart" style="width: ${(avgFart / maxFart) * 100}%"></div>
+                </div>
+                <div class="chart-value">${avgFart.toFixed(1)}</div>
+            </div>
+            <div style="margin-top: 15px; font-size: 13px; color: #888;">
+                💡 建议：腹胀程度控制在1以下，放屁次数控制在5次以下为佳
+            </div>
+        </div>
+    `;
+}
+
+// 格式化日期
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    
+    if (dateStr === today.toISOString().split('T')[0]) {
+        return '今天';
+    } else if (dateStr === yesterday.toISOString().split('T')[0]) {
+        return '昨天';
+    } else {
+        return `${date.getMonth() + 1}月${date.getDate()}日`;
+    }
 }
 </script>
 </body>
