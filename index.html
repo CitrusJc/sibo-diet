@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SIBO饮食助手</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
@@ -18,423 +14,235 @@
             padding-bottom: 20px;
         }
 
-        .container {
-            max-width: 430px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .container { max-width: 430px; margin: 0 auto; padding: 20px; }
 
-        .header {
-            text-align: center;
-            color: white;
-            padding: 30px 0;
-        }
-
-        .header h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
+        .header { text-align: center; color: white; padding: 30px 0; }
+        .header h1 { font-size: 28px; margin-bottom: 8px; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .header p { font-size: 14px; opacity: 0.9; }
 
         .search-box {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: white; border-radius: 16px; padding: 20px;
+            margin-bottom: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-
-        .search-input-wrapper {
-            position: relative;
-            display: flex;
-            gap: 10px;
-        }
-
+        .search-input-wrapper { position: relative; display: flex; gap: 10px; }
         .search-input {
-            flex: 1;
-            padding: 14px 18px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s;
-            outline: none;
+            flex: 1; padding: 14px 18px; border: 2px solid #e0e0e0;
+            border-radius: 12px; font-size: 16px; transition: all 0.3s; outline: none;
         }
-
-        .search-input:focus {
-            border-color: #667eea;
-        }
-
+        .search-input:focus { border-color: #667eea; }
         .search-btn {
-            padding: 14px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: transform 0.2s;
+            padding: 14px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; border: none; border-radius: 12px; font-size: 16px;
+            cursor: pointer; transition: transform 0.2s;
         }
-
-        .search-btn:active {
-            transform: scale(0.95);
-        }
+        .search-btn:active { transform: scale(0.95); }
 
         .tabs {
-            display: flex;
-            background: white;
-            border-radius: 12px;
-            padding: 5px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            display: flex; background: white; border-radius: 12px; padding: 5px;
+            margin-bottom: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
-
         .tab {
-            flex: 1;
-            padding: 12px;
-            text-align: center;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 14px;
-            color: #666;
+            flex: 1; padding: 12px 4px; text-align: center; border-radius: 8px;
+            cursor: pointer; transition: all 0.3s; font-size: 13px; color: #666;
         }
-
         .tab.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: 500;
+            color: white; font-weight: 500;
         }
 
         .content-card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background: white; border-radius: 16px; padding: 20px;
+            margin-bottom: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-
         .section-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 18px; font-weight: 600; color: #333;
+            margin-bottom: 15px; display: flex; align-items: center; gap: 8px;
         }
 
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-        }
-
+        .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
         .category-item {
-            text-align: center;
-            padding: 15px 8px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: #f8f9fa;
+            text-align: center; padding: 15px 8px; border-radius: 12px;
+            cursor: pointer; transition: all 0.3s; background: #f8f9fa;
         }
-
-        .category-item:hover {
-            background: #e9ecef;
-            transform: translateY(-2px);
-        }
-
+        .category-item:hover { background: #e9ecef; transform: translateY(-2px); }
         .category-item.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;
         }
-
-        .category-icon {
-            font-size: 28px;
-            margin-bottom: 6px;
-        }
-
-        .category-name {
-            font-size: 12px;
-        }
-
-        .food-list {
-            display: none;
-        }
-
-        .food-list.active {
-            display: block;
-        }
+        .category-icon { font-size: 28px; margin-bottom: 6px; }
+        .category-name { font-size: 12px; }
 
         .food-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
-            transition: background 0.2s;
+            display: flex; align-items: center; padding: 15px;
+            border-bottom: 1px solid #f0f0f0; transition: background 0.2s;
         }
-
-        .food-item:last-child {
-            border-bottom: none;
-        }
-
-        .food-item:hover {
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-
+        .food-item:last-child { border-bottom: none; }
+        .food-item:hover { background: #f8f9fa; border-radius: 8px; }
         .food-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-right: 15px;
+            width: 48px; height: 48px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; margin-right: 15px;
         }
+        .food-icon.safe { background: #d4edda; }
+        .food-icon.caution { background: #fff3cd; }
+        .food-icon.avoid { background: #f8d7da; }
+        .food-info { flex: 1; }
+        .food-name { font-size: 16px; font-weight: 500; color: #333; margin-bottom: 4px; }
+        .food-desc { font-size: 13px; color: #888; }
+        .food-status { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+        .food-status.safe { background: #d4edda; color: #155724; }
+        .food-status.caution { background: #fff3cd; color: #856404; }
+        .food-status.avoid { background: #f8d7da; color: #721c24; }
 
-        .food-icon.safe {
-            background: #d4edda;
-        }
-
-        .food-icon.caution {
-            background: #fff3cd;
-        }
-
-        .food-icon.avoid {
-            background: #f8d7da;
-        }
-
-        .food-info {
-            flex: 1;
-        }
-
-        .food-name {
-            font-size: 16px;
-            font-weight: 500;
-            color: #333;
-            margin-bottom: 4px;
-        }
-
-        .food-desc {
-            font-size: 13px;
-            color: #888;
-        }
-
-        .food-status {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .food-status.safe {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .food-status.caution {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .food-status.avoid {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .recipe-checker {
-            display: none;
-        }
-
-        .recipe-checker.active {
-            display: block;
-        }
-
+        .recipe-checker { display: none; }
+        .recipe-checker.active { display: block; }
         .recipe-input {
-            width: 100%;
-            min-height: 120px;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 15px;
-            resize: vertical;
-            outline: none;
-            transition: border-color 0.3s;
-            margin-bottom: 15px;
+            width: 100%; min-height: 120px; padding: 15px; border: 2px solid #e0e0e0;
+            border-radius: 12px; font-size: 15px; resize: vertical; outline: none;
+            transition: border-color 0.3s; margin-bottom: 15px;
         }
-
-        .recipe-input:focus {
-            border-color: #667eea;
-        }
-
+        .recipe-input:focus { border-color: #667eea; }
         .check-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: transform 0.2s;
+            width: 100%; padding: 16px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; border: none; border-radius: 12px; font-size: 16px;
+            font-weight: 500; cursor: pointer; transition: transform 0.2s;
         }
+        .check-btn:active { transform: scale(0.98); }
 
-        .check-btn:active {
-            transform: scale(0.98);
-        }
-
-        .recipe-result {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 12px;
-            display: none;
-        }
-
-        .recipe-result.show {
-            display: block;
-        }
-
-        .recipe-result.safe {
-            background: #d4edda;
-        }
-
-        .recipe-result.caution {
-            background: #fff3cd;
-        }
-
-        .recipe-result.avoid {
-            background: #f8d7da;
-        }
-
-        .result-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .result-desc {
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .ingredient-list {
-            margin-top: 15px;
-        }
-
-        .ingredient-item {
-            display: flex;
-            align-items: center;
-            padding: 8px 0;
-            font-size: 14px;
-        }
-
-        .ingredient-status {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .ingredient-status.safe {
-            background: #28a745;
-        }
-
-        .ingredient-status.caution {
-            background: #ffc107;
-        }
-
-        .ingredient-status.avoid {
-            background: #dc3545;
-        }
+        .recipe-result { margin-top: 20px; padding: 20px; border-radius: 12px; display: none; }
+        .recipe-result.show { display: block; }
+        .recipe-result.safe { background: #d4edda; }
+        .recipe-result.caution { background: #fff3cd; }
+        .recipe-result.avoid { background: #f8d7da; }
+        .result-title { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+        .result-desc { font-size: 14px; line-height: 1.6; }
+        .ingredient-list { margin-top: 15px; }
+        .ingredient-item { display: flex; align-items: center; padding: 8px 0; font-size: 14px; }
+        .ingredient-status { width: 8px; height: 8px; border-radius: 50%; margin-right: 10px; }
+        .ingredient-status.safe { background: #28a745; }
+        .ingredient-status.caution { background: #ffc107; }
+        .ingredient-status.avoid { background: #dc3545; }
+        .ingredient-status.unknown { background: #999; }
 
         .legend {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 15px;
-            flex-wrap: wrap;
+            display: flex; justify-content: center; gap: 20px;
+            margin-top: 15px; flex-wrap: wrap;
+        }
+        .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #666; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .legend-dot.safe { background: #28a745; }
+        .legend-dot.caution { background: #ffc107; }
+        .legend-dot.avoid { background: #dc3545; }
+
+        .empty-state { text-align: center; padding: 30px 20px; color: #999; }
+        .empty-state-icon { font-size: 48px; margin-bottom: 15px; }
+        .empty-state-text { font-size: 14px; }
+
+        /* ===== 未找到食物的详细提示卡片 ===== */
+        .not-found-card {
+            background: #f0f4ff; border-radius: 12px; padding: 20px;
+            margin-top: 15px; border: 1px solid #d0d7f7;
+        }
+        .not-found-title {
+            font-size: 15px; font-weight: 600; color: #4a5568; margin-bottom: 12px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .not-found-reason {
+            font-size: 13px; color: #666; line-height: 1.7; margin-bottom: 12px;
+        }
+        .not-found-category {
+            font-size: 13px; color: #666; line-height: 1.8;
+        }
+        .not-found-category strong { color: #4a5568; }
+        .not-found-tip {
+            font-size: 12px; color: #888; margin-top: 12px; padding-top: 10px;
+            border-top: 1px solid #d0d7f7; font-style: italic;
         }
 
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            color: #666;
+        /* ===== 热量查询标签页 ===== */
+        .calorie-section { display: none; }
+        .calorie-section.active { display: block; }
+
+        .calorie-result-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 16px; padding: 25px; margin-top: 15px; color: white;
+            display: none;
+        }
+        .calorie-result-card.show { display: block; }
+        .calorie-value { font-size: 48px; font-weight: 700; margin-bottom: 5px; }
+        .calorie-unit { font-size: 14px; opacity: 0.9; margin-bottom: 15px; }
+        .calorie-detail { font-size: 13px; line-height: 1.8; opacity: 0.95; }
+        .calorie-bar-bg {
+            background: rgba(255,255,255,0.25); border-radius: 8px; height: 10px;
+            margin: 10px 0; overflow: hidden;
+        }
+        .calorie-bar {
+            height: 100%; border-radius: 8px; background: white;
+            transition: width 0.5s ease;
         }
 
-        .legend-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
+        .calorie-list-item {
+            display: flex; align-items: center; padding: 14px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .calorie-list-item:last-child { border-bottom: none; }
+        .calorie-list-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; margin-right: 15px; background: #fff0f3;
+        }
+        .calorie-list-info { flex: 1; }
+        .calorie-list-name { font-size: 16px; font-weight: 500; color: #333; margin-bottom: 4px; }
+        .calorie-list-desc { font-size: 13px; color: #888; }
+        .calorie-list-value {
+            font-size: 16px; font-weight: 600; color: #f5576c;
+            white-space: nowrap;
         }
 
-        .legend-dot.safe {
-            background: #28a745;
+        /* ===== 菜谱推荐卡片 ===== */
+        .recipe-suggest-card {
+            background: #f8f9fa; border-radius: 12px; padding: 15px;
+            margin-top: 15px; border: 1px dashed #ccc;
         }
-
-        .legend-dot.caution {
-            background: #ffc107;
+        .recipe-suggest-title {
+            font-size: 14px; font-weight: 600; color: #667eea; margin-bottom: 10px;
         }
-
-        .legend-dot.avoid {
-            background: #dc3545;
+        .recipe-suggest-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .recipe-suggest-item {
+            padding: 6px 14px; background: white; border-radius: 20px;
+            font-size: 13px; color: #555; cursor: pointer; border: 1px solid #e0e0e0;
+            transition: all 0.2s;
         }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #999;
-        }
-
-        .empty-state-icon {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .empty-state-text {
-            font-size: 14px;
+        .recipe-suggest-item:hover {
+            background: #667eea; color: white; border-color: #667eea;
         }
 
         .tips-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 15px;
+            color: white; border-radius: 16px; padding: 20px; margin-bottom: 15px;
         }
-
         .tips-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 16px; font-weight: 600; margin-bottom: 12px;
+            display: flex; align-items: center; gap: 8px;
         }
+        .tips-list { font-size: 13px; line-height: 1.8; opacity: 0.95; }
+        .tips-list li { margin-left: 18px; margin-bottom: 6px; }
 
-        .tips-list {
-            font-size: 13px;
-            line-height: 1.8;
-            opacity: 0.95;
+        .mode-switch {
+            display: flex; gap: 8px; margin-bottom: 15px;
         }
-
-        .tips-list li {
-            margin-left: 18px;
-            margin-bottom: 6px;
+        .mode-btn {
+            flex: 1; padding: 12px; border-radius: 10px; border: 2px solid #e0e0e0;
+            background: white; font-size: 14px; cursor: pointer; transition: all 0.3s;
+            text-align: center; color: #666;
+        }
+        .mode-btn.active {
+            border-color: #667eea; background: #f0f4ff; color: #667eea; font-weight: 500;
         }
 
         @media (max-width: 380px) {
-            .category-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .category-grid { grid-template-columns: repeat(3, 1fr); }
+            .tabs { flex-wrap: wrap; }
+            .tab { min-width: 30%; }
         }
     </style>
 </head>
@@ -453,98 +261,88 @@
         </div>
 
         <div class="tabs">
-            <div class="tab active" onclick="switchTab('food')">食物查询</div>
-            <div class="tab" onclick="switchTab('recipe')">食谱评估</div>
+            <div class="tab active" onclick="switchTab('food', this)">食物查询</div>
+            <div class="tab" onclick="switchTab('recipe', this)">食谱评估</div>
+            <div class="tab" onclick="switchTab('calorie', this)">热量查询</div>
         </div>
 
+        <!-- ====== 食物查询 ====== -->
         <div id="foodTab" class="food-section">
             <div class="content-card">
-                <div class="section-title">
-                    <span>📂</span>
-                    <span>食物分类</span>
-                </div>
+                <div class="section-title"><span>📂</span><span>食物分类</span></div>
                 <div class="category-grid">
-                    <div class="category-item active" onclick="selectCategory('vegetable')">
-                        <div class="category-icon">🥬</div>
-                        <div class="category-name">蔬菜</div>
+                    <div class="category-item active" onclick="selectCategory('vegetable', this)">
+                        <div class="category-icon">🥬</div><div class="category-name">蔬菜</div>
                     </div>
-                    <div class="category-item" onclick="selectCategory('fruit')">
-                        <div class="category-icon">🍎</div>
-                        <div class="category-name">水果</div>
+                    <div class="category-item" onclick="selectCategory('fruit', this)">
+                        <div class="category-icon">🍎</div><div class="category-name">水果</div>
                     </div>
-                    <div class="category-item" onclick="selectCategory('grain')">
-                        <div class="category-icon">🌾</div>
-                        <div class="category-name">谷物</div>
+                    <div class="category-item" onclick="selectCategory('grain', this)">
+                        <div class="category-icon">🌾</div><div class="category-name">谷物</div>
                     </div>
-                    <div class="category-item" onclick="selectCategory('protein')">
-                        <div class="category-icon">🥩</div>
-                        <div class="category-name">蛋白质</div>
+                    <div class="category-item" onclick="selectCategory('protein', this)">
+                        <div class="category-icon">🥩</div><div class="category-name">蛋白质</div>
                     </div>
-                    <div class="category-item" onclick="selectCategory('dairy')">
-                        <div class="category-icon">🥛</div>
-                        <div class="category-name">乳制品</div>
+                    <div class="category-item" onclick="selectCategory('dairy', this)">
+                        <div class="category-icon">🥛</div><div class="category-name">乳制品</div>
                     </div>
-                    <div class="category-item" onclick="selectCategory('nut')">
-                        <div class="category-icon">🥜</div>
-                        <div class="category-name">坚果</div>
+                    <div class="category-item" onclick="selectCategory('nut', this)">
+                        <div class="category-icon">🥜</div><div class="category-name">坚果</div>
                     </div>
-                    <div class="category-item" onclick="selectCategory('seasoning')">
-                        <div class="category-icon">🧂</div>
-                        <div class="category-name">调味品</div>
+                    <div class="category-item" onclick="selectCategory('seasoning', this)">
+                        <div class="category-icon">🧂</div><div class="category-name">调味品</div>
                     </div>
-                    <div class="category-item" onclick="selectCategory('drink')">
-                        <div class="category-icon">🍵</div>
-                        <div class="category-name">饮品</div>
+                    <div class="category-item" onclick="selectCategory('drink', this)">
+                        <div class="category-icon">🍵</div><div class="category-name">饮品</div>
                     </div>
                 </div>
             </div>
-
             <div class="content-card">
-                <div class="section-title">
-                    <span>📋</span>
-                    <span>食物列表</span>
-                </div>
-                <div id="foodListContainer">
-                    <!-- 食物列表将在这里动态生成 -->
-                </div>
+                <div class="section-title"><span>📋</span><span>食物列表</span></div>
+                <div id="foodListContainer"></div>
                 <div class="legend">
-                    <div class="legend-item">
-                        <div class="legend-dot safe"></div>
-                        <span>适合食用</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-dot caution"></div>
-                        <span>适量食用</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-dot avoid"></div>
-                        <span>避免食用</span>
-                    </div>
+                    <div class="legend-item"><div class="legend-dot safe"></div><span>适合食用</span></div>
+                    <div class="legend-item"><div class="legend-dot caution"></div><span>适量食用</span></div>
+                    <div class="legend-item"><div class="legend-dot avoid"></div><span>避免食用</span></div>
                 </div>
             </div>
         </div>
 
+        <!-- ====== 食谱评估 ====== -->
         <div id="recipeTab" class="recipe-checker">
             <div class="content-card">
-                <div class="section-title">
-                    <span>🍳</span>
-                    <span>食谱评估</span>
+                <div class="section-title"><span>🍳</span><span>食谱评估</span></div>
+                <div class="mode-switch">
+                    <div class="mode-btn active" id="modeDish" onclick="switchRecipeMode('dish')">菜名查询</div>
+                    <div class="mode-btn" id="modeManual" onclick="switchRecipeMode('manual')">手动输入食材</div>
                 </div>
-                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">输入食谱中的食材，用逗号或换行分隔，系统将自动分析是否适合SIBO患者食用</p>
-                <textarea class="recipe-input" id="recipeInput" placeholder="例如：&#10;胡萝卜&#10;鸡肉&#10;大米&#10;生姜"></textarea>
-                <button class="check-btn" onclick="checkRecipe()">评估食谱</button>
+
+                <div id="dishMode">
+                    <p style="font-size: 14px; color: #666; margin-bottom: 12px;">输入菜名，系统自动分析菜谱中的食材是否适合SIBO患者</p>
+                    <div class="search-input-wrapper" style="margin-bottom: 15px;">
+                        <input type="text" class="search-input" id="dishInput" placeholder="输入菜名，如：宫保鸡丁">
+                        <button class="search-btn" onclick="checkDish()">分析</button>
+                    </div>
+                    <div class="recipe-suggest-card">
+                        <div class="recipe-suggest-title">🍽️ 热门菜谱（点击直接分析）</div>
+                        <div class="recipe-suggest-list" id="recipeSuggestList"></div>
+                    </div>
+                </div>
+
+                <div id="manualMode" style="display:none;">
+                    <p style="font-size: 14px; color: #666; margin-bottom: 12px;">输入食谱中的食材，用逗号或换行分隔</p>
+                    <textarea class="recipe-input" id="recipeInput" placeholder="例如：&#10;胡萝卜&#10;鸡肉&#10;大米&#10;生姜"></textarea>
+                    <button class="check-btn" onclick="checkRecipe()">评估食谱</button>
+                </div>
+
                 <div class="recipe-result" id="recipeResult">
                     <div class="result-title" id="resultTitle"></div>
                     <div class="result-desc" id="resultDesc"></div>
                     <div class="ingredient-list" id="ingredientList"></div>
                 </div>
             </div>
-
             <div class="tips-card">
-                <div class="tips-title">
-                    <span>💡</span>
-                    <span>SIBO饮食小贴士</span>
-                </div>
+                <div class="tips-title"><span>💡</span><span>SIBO饮食小贴士</span></div>
                 <ul class="tips-list">
                     <li>遵循低FODMAP饮食原则，减少易发酵碳水化合物摄入</li>
                     <li>避免洋葱、大蒜、豆类等高FODMAP食物</li>
@@ -554,330 +352,896 @@
                 </ul>
             </div>
         </div>
+
+        <!-- ====== 热量查询 ====== -->
+        <div id="calorieTab" class="calorie-section">
+            <div class="content-card">
+                <div class="section-title"><span>🔥</span><span>热量查询</span></div>
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">查询食物的热量信息，帮助控制每日摄入</p>
+                <div class="search-input-wrapper" style="margin-bottom: 15px;">
+                    <input type="text" class="search-input" id="calorieInput" placeholder="输入食物名称，如：鸡胸肉">
+                    <button class="search-btn" onclick="searchCalorie()">查询</button>
+                </div>
+                <div id="calorieResultCard" class="calorie-result-card"></div>
+                <div id="calorieListContainer"></div>
+            </div>
+            <div class="content-card">
+                <div class="section-title"><span>📊</span><span>常见食物热量排行</span></div>
+                <div id="calorieRankContainer"></div>
+            </div>
+        </div>
     </div>
 
-    <script>
-        // SIBO食物数据库
-        const foodDatabase = {
-            vegetable: [
-                { name: '胡萝卜', status: 'safe', icon: '🥕', desc: '低FODMAP，易消化' },
-                { name: '生菜', status: 'safe', icon: '🥬', desc: '低FODMAP，可生食' },
-                { name: '菠菜', status: 'safe', icon: '🍃', desc: '低FODMAP，建议煮熟' },
-                { name: '黄瓜', status: 'safe', icon: '🥒', desc: '低FODMAP，清爽易消化' },
-                { name: '番茄', status: 'safe', icon: '🍅', desc: '低FODMAP，适量食用' },
-                { name: '芹菜', status: 'safe', icon: '🌿', desc: '低FODMAP，茎部更适合' },
-                { name: '南瓜', status: 'safe', icon: '🎃', desc: '低FODMAP，易消化' },
-                { name: '白萝卜', status: 'caution', icon: '🥔', desc: '少量食用，注意分量' },
-                { name: '西兰花', status: 'caution', icon: '🥦', desc: '单次不超过75克' },
-                { name: '花椰菜', status: 'caution', icon: '🥦', desc: '单次不超过75克' },
-                { name: '土豆', status: 'caution', icon: '🥔', desc: '适量食用，注意烹饪方式' },
-                { name: '洋葱', status: 'avoid', icon: '🧅', desc: '高FODMAP，应避免' },
-                { name: '大蒜', status: 'avoid', icon: '🧄', desc: '高FODMAP，应避免' },
-                { name: '芦笋', status: 'avoid', icon: '🎋', desc: '高FODMAP，应避免' },
-                { name: '蘑菇', status: 'avoid', icon: '🍄', desc: '高FODMAP，应避免' },
-                { name: '洋蓟', status: 'avoid', icon: '🌸', desc: '高FODMAP，应避免' },
-                { name: '卷心菜', status: 'avoid', icon: '🥬', desc: '易产生胀气' },
-                { name: '甜菜', status: 'avoid', icon: '🍠', desc: '高FODMAP，应避免' }
-            ],
-            fruit: [
-                { name: '葡萄', status: 'safe', icon: '🍇', desc: '低FODMAP，适量食用' },
-                { name: '猕猴桃', status: 'safe', icon: '🥝', desc: '低FODMAP，富含维生素C' },
-                { name: '橘子', status: 'safe', icon: '🍊', desc: '低FODMAP，易消化' },
-                { name: '橙子', status: 'safe', icon: '🍊', desc: '低FODMAP，富含维生素C' },
-                { name: '菠萝', status: 'safe', icon: '🍍', desc: '低FODMAP，含消化酶' },
-                { name: '草莓', status: 'safe', icon: '🍓', desc: '低FODMAP，适量食用' },
-                { name: '蓝莓', status: 'safe', icon: '🫐', desc: '低FODMAP，抗氧化' },
-                { name: '香蕉', status: 'caution', icon: '🍌', desc: '选择未成熟的青香蕉' },
-                { name: '柠檬', status: 'safe', icon: '🍋', desc: '低FODMAP，可调味' },
-                { name: '青苹果', status: 'caution', icon: '🍏', desc: '少量食用' },
-                { name: '苹果', status: 'avoid', icon: '🍎', desc: '高FODMAP，应避免' },
-                { name: '梨', status: 'avoid', icon: '🍐', desc: '高FODMAP，应避免' },
-                { name: '西瓜', status: 'avoid', icon: '🍉', desc: '高FODMAP，应避免' },
-                { name: '樱桃', status: 'avoid', icon: '🍒', desc: '高FODMAP，应避免' },
-                { name: '芒果', status: 'avoid', icon: '🥭', desc: '高FODMAP，应避免' },
-                { name: '桃子', status: 'avoid', icon: '🍑', desc: '高FODMAP，应避免' }
-            ],
-            grain: [
-                { name: '大米', status: 'safe', icon: '🍚', desc: '低FODMAP，易消化' },
-                { name: '燕麦', status: 'safe', icon: '🌾', desc: '选择无麸质燕麦' },
-                { name: '藜麦', status: 'safe', icon: '🌾', desc: '易消化的高纤维谷物' },
-                { name: '小米', status: 'safe', icon: '🌾', desc: '低FODMAP，易消化' },
-                { name: '糙米', status: 'caution', icon: '🍚', desc: '适量食用，注意消化' },
-                { name: '面条', status: 'safe', icon: '🍜', desc: '选择无麸质面条' },
-                { name: '米粉', status: 'safe', icon: '🍜', desc: '低FODMAP，易消化' },
-                { name: '小麦', status: 'avoid', icon: '🌾', desc: '含麸质，应避免' },
-                { name: '面包', status: 'avoid', icon: '🍞', desc: '含麸质，应选择无麸质' },
-                { name: '黑麦', status: 'avoid', icon: '🌾', desc: '含麸质，应避免' },
-                { name: '大麦', status: 'avoid', icon: '🌾', desc: '含麸质，应避免' }
-            ],
-            protein: [
-                { name: '鸡肉', status: 'safe', icon: '🍗', desc: '优质蛋白，易消化' },
-                { name: '鱼肉', status: 'safe', icon: '🐟', desc: '优质蛋白，易消化' },
-                { name: '鸡蛋', status: 'safe', icon: '🥚', desc: '优质蛋白，营养丰富' },
-                { name: '牛肉', status: 'safe', icon: '🥩', desc: '选择瘦肉部位' },
-                { name: '猪肉', status: 'safe', icon: '🥓', desc: '选择瘦肉部位' },
-                { name: '虾', status: 'safe', icon: '🦐', desc: '优质蛋白，易消化' },
-                { name: '豆腐', status: 'caution', icon: '🧈', desc: '少量食用，注意分量' },
-                { name: '豆浆', status: 'caution', icon: '🥛', desc: '少量饮用' },
-                { name: '豆类', status: 'avoid', icon: '🫘', desc: '高FODMAP，易产气' },
-                { name: '扁豆', status: 'avoid', icon: '🫘', desc: '高FODMAP，易产气' },
-                { name: '鹰嘴豆', status: 'avoid', icon: '🫘', desc: '高FODMAP，易产气' },
-                { name: '黑豆', status: 'avoid', icon: '🫘', desc: '高FODMAP，易产气' },
-                { name: '加工肉类', status: 'avoid', icon: '🌭', desc: '含添加剂，应避免' }
-            ],
-            dairy: [
-                { name: '无乳糖牛奶', status: 'safe', icon: '🥛', desc: '选择无乳糖产品' },
-                { name: '杏仁奶', status: 'safe', icon: '🥛', desc: '植物奶，低FODMAP' },
-                { name: '椰子奶', status: 'safe', icon: '🥥', desc: '植物奶，低FODMAP' },
-                { name: '燕麦奶', status: 'safe', icon: '🥛', desc: '植物奶，适量饮用' },
-                { name: '硬奶酪', status: 'safe', icon: '🧀', desc: '低乳糖，可食用' },
-                { name: '切达奶酪', status: 'safe', icon: '🧀', desc: '低乳糖，可食用' },
-                { name: '酸奶', status: 'caution', icon: '🥛', desc: '选择无乳糖酸奶' },
-                { name: '牛奶', status: 'avoid', icon: '🥛', desc: '含乳糖，应避免' },
-                { name: '软奶酪', status: 'avoid', icon: '🧀', desc: '高乳糖，应避免' },
-                { name: '奶油', status: 'avoid', icon: '🧈', desc: '高脂肪，应限制' },
-                { name: '冰淇淋', status: 'avoid', icon: '🍦', desc: '含乳糖和糖，应避免' }
-            ],
-            nut: [
-                { name: '核桃', status: 'safe', icon: '🥜', desc: '适量食用，每天10-15克' },
-                { name: '杏仁', status: 'safe', icon: '🥜', desc: '适量食用，每天10-15克' },
-                { name: '南瓜子', status: 'safe', icon: '🎃', desc: '适量食用' },
-                { name: '葵花籽', status: 'safe', icon: '🌻', desc: '适量食用' },
-                { name: '腰果', status: 'caution', icon: '🥜', desc: '少量食用' },
-                { name: '开心果', status: 'caution', icon: '🥜', desc: '少量食用' },
-                { name: '榛子', status: 'caution', icon: '🥜', desc: '少量食用' },
-                { name: '山核桃', status: 'caution', icon: '🥜', desc: '少量食用' },
-                { name: '花生', status: 'caution', icon: '🥜', desc: '适量食用' },
-                { name: '芝麻酱', status: 'caution', icon: '🍯', desc: '少量食用' }
-            ],
-            seasoning: [
-                { name: '生姜', status: 'safe', icon: '🫚', desc: '助消化，缓解胃部不适' },
-                { name: '姜黄', status: 'safe', icon: '🌿', desc: '抗炎，有益肠道' },
-                { name: '薄荷', status: 'safe', icon: '🌿', desc: '助消化，缓解胀气' },
-                { name: '迷迭香', status: 'safe', icon: '🌿', desc: '天然香料，可食用' },
-                { name: '百里香', status: 'safe', icon: '🌿', desc: '天然香料，可食用' },
-                { name: '盐', status: 'safe', icon: '🧂', desc: '适量使用' },
-                { name: '黑胡椒', status: 'safe', icon: '🧂', desc: '适量使用' },
-                { name: '醋', status: 'safe', icon: '🍶', desc: '适量使用' },
-                { name: '酱油', status: 'caution', icon: '🍶', desc: '选择无麸质酱油' },
-                { name: '大蒜粉', status: 'avoid', icon: '🧄', desc: '含大蒜成分，应避免' },
-                { name: '洋葱粉', status: 'avoid', icon: '🧅', desc: '含洋葱成分，应避免' },
-                { name: '辣椒酱', status: 'avoid', icon: '🌶️', desc: '刺激肠道，应避免' },
-                { name: '番茄酱', status: 'avoid', icon: '🍅', desc: '含添加糖，应避免' },
-                { name: '蜂蜜', status: 'avoid', icon: '🍯', desc: '高糖，应避免' },
-                { name: '糖', status: 'avoid', icon: '🍬', desc: '限制精制糖摄入' }
-            ],
-            drink: [
-                { name: '水', status: 'safe', icon: '💧', desc: '最安全的饮品' },
-                { name: '生姜茶', status: 'safe', icon: '🍵', desc: '助消化，缓解胃部不适' },
-                { name: '薄荷茶', status: 'safe', icon: '🍵', desc: '助消化，缓解胀气' },
-                { name: '绿茶', status: 'safe', icon: '🍵', desc: '适量饮用，避免空腹' },
-                { name: '柠檬水', status: 'safe', icon: '🍋', desc: '低FODMAP，可饮用' },
-                { name: '椰子水', status: 'caution', icon: '🥥', desc: '少量饮用' },
-                { name: '咖啡', status: 'caution', icon: '☕', desc: '少量饮用，避免空腹' },
-                { name: '红茶', status: 'caution', icon: '🍵', desc: '适量饮用' },
-                { name: '果汁', status: 'avoid', icon: '🧃', desc: '高糖，应避免' },
-                { name: '汽水', status: 'avoid', icon: '🥤', desc: '含气，应避免' },
-                { name: '酒精', status: 'avoid', icon: '🍺', desc: '刺激肠道，应避免' },
-                { name: '运动饮料', status: 'avoid', icon: '🥤', desc: '高糖，应避免' }
-            ]
-        };
+<script>
+// =============================================
+// SIBO食物数据库（含热量数据）
+// =============================================
+const foodDatabase = {
+    vegetable: [
+        { name: '胡萝卜', status: 'safe', icon: '🥕', desc: '低FODMAP，易消化', calorie: 41 },
+        { name: '生菜', status: 'safe', icon: '🥬', desc: '低FODMAP，可生食', calorie: 15 },
+        { name: '菠菜', status: 'safe', icon: '🍃', desc: '低FODMAP，建议煮熟', calorie: 28 },
+        { name: '黄瓜', status: 'safe', icon: '🥒', desc: '低FODMAP，清爽易消化', calorie: 16 },
+        { name: '番茄', status: 'safe', icon: '🍅', desc: '低FODMAP，适量食用', calorie: 22 },
+        { name: '芹菜', status: 'safe', icon: '🌿', desc: '低FODMAP，茎部更适合', calorie: 18 },
+        { name: '南瓜', status: 'safe', icon: '🎃', desc: '低FODMAP，易消化', calorie: 26 },
+        { name: '白萝卜', status: 'caution', icon: '🥔', desc: '少量食用，注意分量', calorie: 20 },
+        { name: '西兰花', status: 'caution', icon: '🥦', desc: '单次不超过75克', calorie: 36 },
+        { name: '花椰菜', status: 'caution', icon: '🥦', desc: '单次不超过75克', calorie: 25 },
+        { name: '土豆', status: 'caution', icon: '🥔', desc: '适量食用，注意烹饪方式', calorie: 87 },
+        { name: '洋葱', status: 'avoid', icon: '🧅', desc: '高FODMAP，应避免', calorie: 44 },
+        { name: '大蒜', status: 'avoid', icon: '🧄', desc: '高FODMAP，应避免', calorie: 149 },
+        { name: '芦笋', status: 'avoid', icon: '🎋', desc: '高FODMAP，应避免', calorie: 23 },
+        { name: '蘑菇', status: 'avoid', icon: '🍄', desc: '高FODMAP，应避免', calorie: 26 },
+        { name: '洋蓟', status: 'avoid', icon: '🌸', desc: '高FODMAP，应避免', calorie: 60 },
+        { name: '卷心菜', status: 'avoid', icon: '🥬', desc: '易产生胀气', calorie: 25 },
+        { name: '甜菜', status: 'avoid', icon: '🍠', desc: '高FODMAP，应避免', calorie: 45 },
+        { name: '茄子', status: 'safe', icon: '🍆', desc: '低FODMAP，建议烹饪后食用', calorie: 25 },
+        { name: '青椒', status: 'safe', icon: '🫑', desc: '低FODMAP，适量食用', calorie: 22 },
+        { name: '西葫芦', status: 'safe', icon: '🥒', desc: '低FODMAP，易消化', calorie: 17 },
+        { name: '豆角', status: 'avoid', icon: '🫘', desc: '豆类，易产气', calorie: 30 },
+        { name: '韭菜', status: 'avoid', icon: '🥬', desc: '含高FODMAP，易产气', calorie: 26 }
+    ],
+    fruit: [
+        { name: '葡萄', status: 'safe', icon: '🍇', desc: '低FODMAP，适量食用', calorie: 69 },
+        { name: '猕猴桃', status: 'safe', icon: '🥝', desc: '低FODMAP，富含维生素C', calorie: 56 },
+        { name: '橘子', status: 'safe', icon: '🍊', desc: '低FODMAP，易消化', calorie: 53 },
+        { name: '橙子', status: 'safe', icon: '🍊', desc: '低FODMAP，富含维生素C', calorie: 48 },
+        { name: '菠萝', status: 'safe', icon: '🍍', desc: '低FODMAP，含消化酶', calorie: 50 },
+        { name: '草莓', status: 'safe', icon: '🍓', desc: '低FODMAP，适量食用', calorie: 32 },
+        { name: '蓝莓', status: 'safe', icon: '🫐', desc: '低FODMAP，抗氧化', calorie: 57 },
+        { name: '香蕉', status: 'caution', icon: '🍌', desc: '选择未成熟的青香蕉', calorie: 93 },
+        { name: '柠檬', status: 'safe', icon: '🍋', desc: '低FODMAP，可调味', calorie: 35 },
+        { name: '青苹果', status: 'caution', icon: '🍏', desc: '少量食用', calorie: 52 },
+        { name: '苹果', status: 'avoid', icon: '🍎', desc: '高FODMAP，应避免', calorie: 52 },
+        { name: '梨', status: 'avoid', icon: '🍐', desc: '高FODMAP，应避免', calorie: 58 },
+        { name: '西瓜', status: 'avoid', icon: '🍉', desc: '高FODMAP，应避免', calorie: 31 },
+        { name: '樱桃', status: 'avoid', icon: '🍒', desc: '高FODMAP，应避免', calorie: 63 },
+        { name: '芒果', status: 'avoid', icon: '🥭', desc: '高FODMAP，应避免', calorie: 60 },
+        { name: '桃子', status: 'avoid', icon: '🍑', desc: '高FODMAP，应避免', calorie: 51 },
+        { name: '荔枝', status: 'avoid', icon: '🍒', desc: '高糖高FODMAP，应避免', calorie: 70 },
+        { name: '龙眼', status: 'avoid', icon: '🍒', desc: '高糖高FODMAP，应避免', calorie: 71 }
+    ],
+    grain: [
+        { name: '大米', status: 'safe', icon: '🍚', desc: '低FODMAP，易消化', calorie: 130 },
+        { name: '燕麦', status: 'safe', icon: '🌾', desc: '选择无麸质燕麦', calorie: 150 },
+        { name: '藜麦', status: 'safe', icon: '🌾', desc: '易消化的高纤维谷物', calorie: 120 },
+        { name: '小米', status: 'safe', icon: '🌾', desc: '低FODMAP，易消化', calorie: 112 },
+        { name: '糙米', status: 'caution', icon: '🍚', desc: '适量食用，注意消化', calorie: 150 },
+        { name: '面条', status: 'safe', icon: '🍜', desc: '选择无麸质面条', calorie: 140 },
+        { name: '米粉', status: 'safe', icon: '🍜', desc: '低FODMAP，易消化', calorie: 140 },
+        { name: '小麦', status: 'avoid', icon: '🌾', desc: '含麸质，应避免', calorie: 339 },
+        { name: '面包', status: 'avoid', icon: '🍞', desc: '含麸质，应选择无麸质', calorie: 265 },
+        { name: '黑麦', status: 'avoid', icon: '🌾', desc: '含麸质，应避免', calorie: 335 },
+        { name: '大麦', status: 'avoid', icon: '🌾', desc: '含麸质，应避免', calorie: 354 },
+        { name: '红薯', status: 'caution', icon: '🍠', desc: '适量食用，少量为宜', calorie: 99 },
+        { name: '玉米', status: 'caution', icon: '🌽', desc: '少量食用', calorie: 112 }
+    ],
+    protein: [
+        { name: '鸡肉', status: 'safe', icon: '🍗', desc: '优质蛋白，易消化', calorie: 125 },
+        { name: '鸡胸肉', status: 'safe', icon: '🍗', desc: '低脂高蛋白，推荐', calorie: 118 },
+        { name: '鱼肉', status: 'safe', icon: '🐟', desc: '优质蛋白，易消化', calorie: 100 },
+        { name: '鸡蛋', status: 'safe', icon: '🥚', desc: '优质蛋白，营养丰富', calorie: 144 },
+        { name: '牛肉', status: 'safe', icon: '🥩', desc: '选择瘦肉部位', calorie: 190 },
+        { name: '猪肉', status: 'safe', icon: '🥓', desc: '选择瘦肉部位', calorie: 242 },
+        { name: '虾', status: 'safe', icon: '🦐', desc: '优质蛋白，易消化', calorie: 93 },
+        { name: '豆腐', status: 'caution', icon: '🧈', desc: '少量食用，注意分量', calorie: 76 },
+        { name: '豆浆', status: 'caution', icon: '🥛', desc: '少量饮用', calorie: 33 },
+        { name: '豆类', status: 'avoid', icon: '🫘', desc: '高FODMAP，易产气', calorie: 130 },
+        { name: '扁豆', status: 'avoid', icon: '🫘', desc: '高FODMAP，易产气', calorie: 116 },
+        { name: '鹰嘴豆', status: 'avoid', icon: '🫘', desc: '高FODMAP，易产气', calorie: 164 },
+        { name: '黑豆', status: 'avoid', icon: '🫘', desc: '高FODMAP，易产气', calorie: 132 },
+        { name: '加工肉类', status: 'avoid', icon: '🌭', desc: '含添加剂，应避免', calorie: 300 },
+        { name: '鸭肉', status: 'safe', icon: '🍗', desc: '适量食用，去皮为佳', calorie: 240 }
+    ],
+    dairy: [
+        { name: '无乳糖牛奶', status: 'safe', icon: '🥛', desc: '选择无乳糖产品', calorie: 60 },
+        { name: '杏仁奶', status: 'safe', icon: '🥛', desc: '植物奶，低FODMAP', calorie: 30 },
+        { name: '椰子奶', status: 'safe', icon: '🥥', desc: '植物奶，低FODMAP', calorie: 230 },
+        { name: '燕麦奶', status: 'safe', icon: '🥛', desc: '植物奶，适量饮用', calorie: 48 },
+        { name: '硬奶酪', status: 'safe', icon: '🧀', desc: '低乳糖，可食用', calorie: 350 },
+        { name: '切达奶酪', status: 'safe', icon: '🧀', desc: '低乳糖，可食用', calorie: 400 },
+        { name: '酸奶', status: 'caution', icon: '🥛', desc: '选择无乳糖酸奶', calorie: 60 },
+        { name: '牛奶', status: 'avoid', icon: '🥛', desc: '含乳糖，应避免', calorie: 65 },
+        { name: '软奶酪', status: 'avoid', icon: '🧀', desc: '高乳糖，应避免', calorie: 280 },
+        { name: '奶油', status: 'avoid', icon: '🧈', desc: '高脂肪，应限制', calorie: 717 },
+        { name: '冰淇淋', status: 'avoid', icon: '🍦', desc: '含乳糖和糖，应避免', calorie: 210 }
+    ],
+    nut: [
+        { name: '核桃', status: 'safe', icon: '🥜', desc: '适量食用，每天10-15克', calorie: 654 },
+        { name: '杏仁', status: 'safe', icon: '🥜', desc: '适量食用，每天10-15克', calorie: 579 },
+        { name: '南瓜子', status: 'safe', icon: '🎃', desc: '适量食用', calorie: 559 },
+        { name: '葵花籽', status: 'safe', icon: '🌻', desc: '适量食用', calorie: 584 },
+        { name: '腰果', status: 'caution', icon: '🥜', desc: '少量食用', calorie: 553 },
+        { name: '开心果', status: 'caution', icon: '🥜', desc: '少量食用', calorie: 562 },
+        { name: '榛子', status: 'caution', icon: '🥜', desc: '少量食用', calorie: 628 },
+        { name: '山核桃', status: 'caution', icon: '🥜', desc: '少量食用', calorie: 691 },
+        { name: '花生', status: 'caution', icon: '🥜', desc: '适量食用', calorie: 567 },
+        { name: '芝麻酱', status: 'caution', icon: '🍯', desc: '少量食用', calorie: 595 }
+    ],
+    seasoning: [
+        { name: '生姜', status: 'safe', icon: '🫚', desc: '助消化，缓解胃部不适', calorie: 41 },
+        { name: '姜黄', status: 'safe', icon: '🌿', desc: '抗炎，有益肠道', calorie: 312 },
+        { name: '薄荷', status: 'safe', icon: '🌿', desc: '助消化，缓解胀气', calorie: 44 },
+        { name: '迷迭香', status: 'safe', icon: '🌿', desc: '天然香料，可食用', calorie: 131 },
+        { name: '百里香', status: 'safe', icon: '🌿', desc: '天然香料，可食用', calorie: 101 },
+        { name: '盐', status: 'safe', icon: '🧂', desc: '适量使用', calorie: 0 },
+        { name: '黑胡椒', status: 'safe', icon: '🧂', desc: '适量使用', calorie: 251 },
+        { name: '醋', status: 'safe', icon: '🍶', desc: '适量使用', calorie: 18 },
+        { name: '酱油', status: 'caution', icon: '🍶', desc: '选择无麸质酱油', calorie: 53 },
+        { name: '大蒜粉', status: 'avoid', icon: '🧄', desc: '含大蒜成分，应避免', calorie: 331 },
+        { name: '洋葱粉', status: 'avoid', icon: '🧅', desc: '含洋葱成分，应避免', calorie: 340 },
+        { name: '辣椒酱', status: 'avoid', icon: '🌶️', desc: '刺激肠道，应避免', calorie: 50 },
+        { name: '番茄酱', status: 'avoid', icon: '🍅', desc: '含添加糖，应避免', calorie: 80 },
+        { name: '蜂蜜', status: 'avoid', icon: '🍯', desc: '高糖，应避免', calorie: 304 },
+        { name: '糖', status: 'avoid', icon: '🍬', desc: '限制精制糖摄入', calorie: 387 },
+        { name: '八角', status: 'safe', icon: '⭐', desc: '天然香料，适量使用', calorie: 337 },
+        { name: '桂皮', status: 'safe', icon: '🌿', desc: '天然香料，适量使用', calorie: 247 },
+        { name: '花椒', status: 'safe', icon: '🌿', desc: '天然香料，适量使用', calorie: 258 }
+    ],
+    drink: [
+        { name: '水', status: 'safe', icon: '💧', desc: '最安全的饮品', calorie: 0 },
+        { name: '生姜茶', status: 'safe', icon: '🍵', desc: '助消化，缓解胃部不适', calorie: 5 },
+        { name: '薄荷茶', status: 'safe', icon: '🍵', desc: '助消化，缓解胀气', calorie: 2 },
+        { name: '绿茶', status: 'safe', icon: '🍵', desc: '适量饮用，避免空腹', calorie: 1 },
+        { name: '柠檬水', status: 'safe', icon: '🍋', desc: '低FODMAP，可饮用', calorie: 6 },
+        { name: '椰子水', status: 'caution', icon: '🥥', desc: '少量饮用', calorie: 19 },
+        { name: '咖啡', status: 'caution', icon: '☕', desc: '少量饮用，避免空腹', calorie: 2 },
+        { name: '红茶', status: 'caution', icon: '🍵', desc: '适量饮用', calorie: 1 },
+        { name: '果汁', status: 'avoid', icon: '🧃', desc: '高糖，应避免', calorie: 45 },
+        { name: '汽水', status: 'avoid', icon: '🥤', desc: '含气，应避免', calorie: 41 },
+        { name: '酒精', status: 'avoid', icon: '🍺', desc: '刺激肠道，应避免', calorie: 70 },
+        { name: '运动饮料', status: 'avoid', icon: '🥤', desc: '高糖，应避免', calorie: 50 },
+        { name: '奶茶', status: 'avoid', icon: '🧋', desc: '含糖和乳制品，应避免', calorie: 60 }
+    ]
+};
 
-        let currentCategory = 'vegetable';
+// =============================================
+// 内置菜谱数据库（常见家常菜）
+// =============================================
+const recipeDatabase = {
+    '宫保鸡丁': {
+        ingredients: ['鸡肉', '花生', '辣椒酱', '生姜', '醋', '糖'],
+        desc: '经典川菜，含鸡肉和花生，但调料中有辣椒酱和糖需注意'
+    },
+    '番茄炒蛋': {
+        ingredients: ['番茄', '鸡蛋', '糖', '盐'],
+        desc: '家常菜，番茄和鸡蛋都适合SIBO患者'
+    },
+    '清炒西兰花': {
+        ingredients: ['西兰花', '大蒜', '盐'],
+        desc: '含大蒜（高FODMAP），建议去掉大蒜改用生姜调味'
+    },
+    '红烧肉': {
+        ingredients: ['猪肉', '糖', '酱油', '生姜'],
+        desc: '含糖较多，建议减少糖的用量'
+    },
+    '清蒸鱼': {
+        ingredients: ['鱼肉', '生姜', '盐', '酱油'],
+        desc: '非常适合SIBO患者，低FODMAP，易消化'
+    },
+    '蒜蓉菠菜': {
+        ingredients: ['菠菜', '大蒜', '盐'],
+        desc: '含大蒜（高FODMAP），建议改用姜汁调味'
+    },
+    '酸辣汤': {
+        ingredients: ['豆腐', '醋', '胡椒粉', '鸡蛋'],
+        desc: '含豆腐（适量），整体尚可'
+    },
+    '白切鸡': {
+        ingredients: ['鸡肉', '生姜', '盐'],
+        desc: '非常适合SIBO患者，低FODMAP'
+    },
+    '炒生菜': {
+        ingredients: ['生菜', '大蒜', '盐'],
+        desc: '含大蒜（高FODMAP），建议去掉大蒜'
+    },
+    '小米粥': {
+        ingredients: ['小米', '水'],
+        desc: '非常适合SIBO患者，易消化养胃'
+    },
+    '南瓜粥': {
+        ingredients: ['南瓜', '大米', '水'],
+        desc: '适合SIBO患者，低FODMAP，易消化'
+    },
+    '黄瓜炒虾仁': {
+        ingredients: ['黄瓜', '虾', '生姜', '盐'],
+        desc: '非常适合SIBO患者，低FODMAP'
+    },
+    '胡萝卜炒肉丝': {
+        ingredients: ['胡萝卜', '猪肉', '生姜', '盐'],
+        desc: '适合SIBO患者，低FODMAP'
+    },
+    '芹菜炒牛肉': {
+        ingredients: ['芹菜', '牛肉', '生姜', '酱油'],
+        desc: '适合SIBO患者，低FODMAP'
+    },
+    '蘑菇炒肉': {
+        ingredients: ['蘑菇', '猪肉', '大蒜', '酱油'],
+        desc: '含蘑菇和大蒜（均为高FODMAP），不建议食用'
+    },
+    '麻婆豆腐': {
+        ingredients: ['豆腐', '辣椒酱', '大蒜', '花椒'],
+        desc: '含豆腐、辣椒酱和大蒜，不建议食用'
+    },
+    '洋葱炒蛋': {
+        ingredients: ['洋葱', '鸡蛋', '盐'],
+        desc: '含洋葱（高FODMAP），不建议食用'
+    },
+    '韭菜炒鸡蛋': {
+        ingredients: ['韭菜', '鸡蛋', '盐'],
+        desc: '含韭菜（高FODMAP），不建议食用'
+    },
+    '土豆炖牛肉': {
+        ingredients: ['土豆', '牛肉', '洋葱', '生姜', '酱油'],
+        desc: '含洋葱（高FODMAP），建议去掉洋葱'
+    },
+    '冬瓜排骨汤': {
+        ingredients: ['冬瓜', '猪肉', '生姜', '盐'],
+        desc: '适合SIBO患者，清淡易消化'
+    },
+    '番茄鸡蛋汤': {
+        ingredients: ['番茄', '鸡蛋', '盐'],
+        desc: '适合SIBO患者，低FODMAP'
+    },
+    '可乐鸡翅': {
+        ingredients: ['鸡肉', '糖', '酱油', '生姜'],
+        desc: '含大量糖分，不建议SIBO患者食用'
+    },
+    '糖醋排骨': {
+        ingredients: ['猪肉', '糖', '醋', '酱油', '生姜'],
+        desc: '含大量糖分，不建议SIBO患者食用'
+    },
+    '鱼香肉丝': {
+        ingredients: ['猪肉', '胡萝卜', '蘑菇', '糖', '醋', '大蒜', '洋葱'],
+        desc: '含蘑菇、大蒜、洋葱（均为高FODMAP），不建议食用'
+    },
+    '水煮鱼': {
+        ingredients: ['鱼肉', '辣椒酱', '生姜', '大蒜', '花椒'],
+        desc: '含辣椒酱和大蒜（高FODMAP），不建议食用'
+    },
+    '蛋炒饭': {
+        ingredients: ['大米', '鸡蛋', '盐', '生姜'],
+        desc: '适合SIBO患者，低FODMAP'
+    },
+    '蒸蛋羹': {
+        ingredients: ['鸡蛋', '水', '盐'],
+        desc: '非常适合SIBO患者，易消化'
+    },
+    '凉拌黄瓜': {
+        ingredients: ['黄瓜', '大蒜', '醋', '盐', '糖'],
+        desc: '含大蒜和糖，建议去掉大蒜和糖，改用生姜和柠檬汁调味'
+    },
+    '红烧茄子': {
+        ingredients: ['茄子', '大蒜', '糖', '酱油'],
+        desc: '含大蒜和糖（高FODMAP），建议去掉大蒜和糖'
+    },
+    '木瓜炖雪梨': {
+        ingredients: ['苹果', '糖'],
+        desc: '含苹果和糖（高FODMAP），不建议食用'
+    },
+    '皮蛋瘦肉粥': {
+        ingredients: ['大米', '猪肉', '生姜', '盐'],
+        desc: '适合SIBO患者，低FODMAP，易消化'
+    },
+    '清炒胡萝卜': {
+        ingredients: ['胡萝卜', '生姜', '盐'],
+        desc: '非常适合SIBO患者，低FODMAP'
+    },
+    '烤鸡胸肉': {
+        ingredients: ['鸡胸肉', '生姜', '盐', '黑胡椒'],
+        desc: '非常适合SIBO患者，低脂高蛋白'
+    },
+    '三文鱼刺身': {
+        ingredients: ['鱼肉', '生姜', '酱油'],
+        desc: '适合SIBO患者，富含Omega-3'
+    },
+    '丝瓜蛋汤': {
+        ingredients: ['丝瓜', '鸡蛋', '生姜', '盐'],
+        desc: '适合SIBO患者，清淡易消化'
+    },
+    '蒜蓉西兰花': {
+        ingredients: ['西兰花', '大蒜', '盐'],
+        desc: '含大蒜（高FODMAP），建议改用生姜调味'
+    },
+    '麻辣火锅': {
+        ingredients: ['蘑菇', '豆腐', '大蒜', '洋葱', '辣椒酱', '花椒'],
+        desc: '含大量高FODMAP食材，不建议SIBO患者食用'
+    },
+    '饺子': {
+        ingredients: ['小麦', '猪肉', '白菜', '生姜', '酱油'],
+        desc: '含小麦（麸质），建议选择米粉皮饺子'
+    },
+    '包子': {
+        ingredients: ['小麦', '猪肉', '生姜', '酱油'],
+        desc: '含小麦（麸质），建议选择米粉皮'
+    },
+    '葱油饼': {
+        ingredients: ['小麦', '洋葱', '盐'],
+        desc: '含小麦和洋葱（均为高FODMAP），不建议食用'
+    },
+    '豆浆油条': {
+        ingredients: ['小麦', '豆浆', '糖'],
+        desc: '含小麦、豆浆和糖，不建议食用'
+    }
+};
 
-        // 初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            renderFoodList(currentCategory);
-        });
+// =============================================
+// 食物分类说明（用于查不到时的提示）
+// =============================================
+const categoryDescriptions = {
+    vegetable: {
+        name: '蔬菜',
+        icon: '🥬',
+        description: '包括叶菜类、根茎类、瓜果类等新鲜蔬菜',
+        examples: '如：白菜、空心菜、苋菜、丝瓜、苦瓜、山药、芋头、莲藕等',
+        siboTip: 'SIBO患者应避免：洋葱、大蒜、芦笋、蘑菇、韭菜等高FODMAP蔬菜'
+    },
+    fruit: {
+        name: '水果',
+        icon: '🍎',
+        description: '包括新鲜水果、干果、果脯等',
+        examples: '如：山竹、火龙果、百香果、椰子、番石榴、枇杷、桑葚等',
+        siboTip: 'SIBO患者应避免：苹果、梨、西瓜、芒果、荔枝等高糖高FODMAP水果'
+    },
+    grain: {
+        name: '谷物/主食',
+        icon: '🌾',
+        description: '包括米面杂粮、根茎淀粉类主食',
+        examples: '如：荞麦、高粱、薏米、糯米、面粉、馒头、饼类等',
+        siboTip: 'SIBO患者应避免：含麸质的谷物（小麦、黑麦、大麦）'
+    },
+    protein: {
+        name: '蛋白质',
+        icon: '🥩',
+        description: '包括禽畜肉类、海鲜水产、蛋类、豆制品等',
+        examples: '如：羊肉、鹅肉、鸽子、螃蟹、蛤蜊、鱿鱼、鹌鹑蛋、腐竹等',
+        siboTip: 'SIBO患者应避免：豆类（黄豆、绿豆、红豆等），选择瘦肉和鱼虾'
+    },
+    dairy: {
+        name: '乳制品',
+        icon: '🥛',
+        description: '包括牛奶、奶酪、黄油、植物奶等',
+        examples: '如：羊奶、马奶、芝士、黄油、乳清蛋白等',
+        siboTip: 'SIBO患者应避免：含乳糖的乳制品，选择无乳糖或植物奶替代'
+    },
+    nut: {
+        name: '坚果/种子',
+        icon: '🥜',
+        description: '包括各类坚果、种子及其制品',
+        examples: '如：夏威夷果、松子、亚麻籽、奇亚籽、核桃油等',
+        siboTip: 'SIBO患者可适量食用坚果，但需控制分量（每天10-15克）'
+    },
+    seasoning: {
+        name: '调味品',
+        icon: '🧂',
+        description: '包括香料、酱料、甜味剂等',
+        examples: '如：料酒、蚝油、豆瓣酱、芝麻油、蚝油、味精、鸡精等',
+        siboTip: 'SIBO患者应避免：大蒜粉、洋葱粉、蜂蜜、高果糖玉米糖浆等'
+    },
+    drink: {
+        name: '饮品',
+        icon: '🍵',
+        description: '包括茶饮、果汁、酒类、功能饮料等',
+        examples: '如：乌龙茶、普洱茶、花茶、气泡水、酸奶饮料、奶茶等',
+        siboTip: 'SIBO患者应避免：果汁、汽水、含酒精饮品、含糖饮料'
+    }
+};
 
-        // 切换标签页
-        function switchTab(tab) {
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
+// =============================================
+// 全局变量
+// =============================================
+let currentCategory = 'vegetable';
+let currentTab = 'food';
 
-            if (tab === 'food') {
-                document.getElementById('foodTab').style.display = 'block';
-                document.getElementById('recipeTab').classList.remove('active');
-            } else {
-                document.getElementById('foodTab').style.display = 'none';
-                document.getElementById('recipeTab').classList.add('active');
-            }
-        }
+// =============================================
+// 初始化
+// =============================================
+document.addEventListener('DOMContentLoaded', function() {
+    renderFoodList(currentCategory);
+    renderRecipeSuggestions();
+    renderCalorieRank();
+});
 
-        // 选择分类
-        function selectCategory(category) {
-            currentCategory = category;
-            
-            // 更新分类样式
-            const items = document.querySelectorAll('.category-item');
-            items.forEach(item => item.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+// =============================================
+// 标签页切换
+// =============================================
+function switchTab(tab, el) {
+    currentTab = tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
 
-            // 渲染食物列表
-            renderFoodList(category);
-        }
+    document.getElementById('foodTab').style.display = tab === 'food' ? 'block' : 'none';
+    document.getElementById('recipeTab').style.display = tab === 'recipe' ? 'block' : 'none';
+    document.getElementById('calorieTab').style.display = tab === 'calorie' ? 'block' : 'none';
+}
 
-        // 渲染食物列表
-        function renderFoodList(category) {
-            const container = document.getElementById('foodListContainer');
-            const foods = foodDatabase[category];
+// =============================================
+// 食物分类选择
+// =============================================
+function selectCategory(category, el) {
+    currentCategory = category;
+    document.querySelectorAll('.category-item').forEach(item => item.classList.remove('active'));
+    el.classList.add('active');
+    renderFoodList(category);
+}
 
-            if (!foods || foods.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📭</div>
-                        <div class="empty-state-text">暂无数据</div>
-                    </div>
-                `;
-                return;
-            }
+// =============================================
+// 渲染食物列表
+// =============================================
+function renderFoodList(category) {
+    const container = document.getElementById('foodListContainer');
+    const foods = foodDatabase[category];
 
-            container.innerHTML = foods.map(food => `
-                <div class="food-item">
-                    <div class="food-icon ${food.status}">${food.icon}</div>
-                    <div class="food-info">
-                        <div class="food-name">${food.name}</div>
-                        <div class="food-desc">${food.desc}</div>
-                    </div>
-                    <div class="food-status ${food.status}">
-                        ${food.status === 'safe' ? '✓ 适合' : food.status === 'caution' ? '⚠ 适量' : '✗ 避免'}
-                    </div>
+    if (!foods || foods.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📭</div><div class="empty-state-text">暂无数据</div></div>';
+        return;
+    }
+
+    container.innerHTML = foods.map(food => `
+        <div class="food-item">
+            <div class="food-icon ${food.status}">${food.icon}</div>
+            <div class="food-info">
+                <div class="food-name">${food.name}</div>
+                <div class="food-desc">${food.desc}</div>
+            </div>
+            <div class="food-status ${food.status}">
+                ${food.status === 'safe' ? '✓ 适合' : food.status === 'caution' ? '⚠ 适量' : '✗ 避免'}
+            </div>
+        </div>
+    `).join('');
+}
+
+// =============================================
+// 搜索食物（增强版：查不到时给出分类说明）
+// =============================================
+function searchFood() {
+    const keyword = document.getElementById('searchInput').value.trim();
+    if (!keyword) {
+        renderFoodList(currentCategory);
+        return;
+    }
+
+    const container = document.getElementById('foodListContainer');
+    const results = [];
+
+    for (const category in foodDatabase) {
+        const foods = foodDatabase[category];
+        const matched = foods.filter(food =>
+            food.name.toLowerCase().includes(keyword.toLowerCase()) ||
+            keyword.toLowerCase().includes(food.name.toLowerCase())
+        );
+        results.push(...matched);
+    }
+
+    if (results.length === 0) {
+        // 查不到时，显示详细说明
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🔍</div>
+                <div class="empty-state-text" style="margin-bottom: 15px;">未找到「${keyword}」相关食物</div>
+            </div>
+            ${generateNotFoundExplanation(keyword)}
+        `;
+    } else {
+        container.innerHTML = results.map(food => `
+            <div class="food-item">
+                <div class="food-icon ${food.status}">${food.icon}</div>
+                <div class="food-info">
+                    <div class="food-name">${food.name}</div>
+                    <div class="food-desc">${food.desc}</div>
                 </div>
-            `).join('');
-        }
+                <div class="food-status ${food.status}">
+                    ${food.status === 'safe' ? '✓ 适合' : food.status === 'caution' ? '⚠ 适量' : '✗ 避免'}
+                </div>
+            </div>
+        `).join('');
+    }
+}
 
-        // 搜索食物
-        function searchFood() {
-            const keyword = document.getElementById('searchInput').value.trim();
-            if (!keyword) {
-                renderFoodList(currentCategory);
-                return;
-            }
+// =============================================
+// 生成未找到食物的详细说明
+// =============================================
+function generateNotFoundExplanation(keyword) {
+    // 尝试猜测食物可能属于哪个分类
+    let possibleCategories = [];
+    const kw = keyword.toLowerCase();
 
-            const container = document.getElementById('foodListContainer');
-            const results = [];
+    // 简单的关键词匹配猜测分类
+    if (['菜','叶','草','茎','根','瓜','茄','笋','藕','薯','芋','苗','芯','芯'].some(k => kw.includes(k)) ||
+        ['菜','蔬'].some(k => keyword.endsWith(k))) {
+        possibleCategories.push('vegetable');
+    }
+    if (['果','莓','桃','李','杏','枣','柿','柚','榴','蕉','椰','瓜'].some(k => kw.includes(k))) {
+        possibleCategories.push('fruit');
+    }
+    if (['米','面','粮','麦','饼','粉','粥','饭','馍','糕','包'].some(k => kw.includes(k))) {
+        possibleCategories.push('grain');
+    }
+    if (['肉','鸡','鸭','鹅','鱼','虾','蟹','贝','蛋','翅','腿','排','肚','肝','腰','肠'].some(k => kw.includes(k))) {
+        possibleCategories.push('protein');
+    }
+    if (['奶','乳','酪','酪','酪'].some(k => kw.includes(k))) {
+        possibleCategories.push('dairy');
+    }
+    if (['仁','果','籽','核','松','榛','栗'].some(k => kw.includes(k))) {
+        possibleCategories.push('nut');
+    }
+    if (['酱','油','醋','糖','盐','粉','精','味','料','香','椒','麻','辣','蜜','酱'].some(k => kw.includes(k))) {
+        possibleCategories.push('seasoning');
+    }
+    if (['茶','酒','饮','汁','奶','咖','汤','水','露','浆'].some(k => kw.includes(k))) {
+        possibleCategories.push('drink');
+    }
 
-            // 在所有分类中搜索
-            for (const category in foodDatabase) {
-                const foods = foodDatabase[category];
-                const matched = foods.filter(food => 
-                    food.name.toLowerCase().includes(keyword.toLowerCase())
-                );
-                results.push(...matched);
-            }
+    // 如果没猜到，显示所有分类
+    if (possibleCategories.length === 0) {
+        possibleCategories = Object.keys(categoryDescriptions);
+    }
 
-            if (results.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">🔍</div>
-                        <div class="empty-state-text">未找到"${keyword}"相关食物</div>
-                    </div>
-                `;
-            } else {
-                container.innerHTML = results.map(food => `
-                    <div class="food-item">
-                        <div class="food-icon ${food.status}">${food.icon}</div>
-                        <div class="food-info">
-                            <div class="food-name">${food.name}</div>
-                            <div class="food-desc">${food.desc}</div>
+    let html = `
+        <div class="not-found-card">
+            <div class="not-found-title">❓ 为什么查不到「${keyword}」？</div>
+            <div class="not-found-reason">
+                可能的原因：<br>
+                1. 该食物尚未收录到数据库中（目前收录了 ${getAllFoodCount()} 种常见食物）<br>
+                2. 输入的名称与数据库中的名称不完全一致<br>
+                3. 该食物属于地方特色食材，暂未覆盖
+            </div>
+            <div class="not-found-category">
+                <strong>「${keyword}」可能属于以下分类：</strong><br><br>
+                ${possibleCategories.map(catKey => {
+                    const cat = categoryDescriptions[catKey];
+                    return `
+                        <div style="margin-bottom: 10px;">
+                            <strong>${cat.icon} ${cat.name}</strong><br>
+                            <span style="color:#888;">${cat.description}</span><br>
+                            <span style="color:#888;">常见食物：${cat.examples}</span><br>
+                            <span style="color:#e53e3e;">⚠️ ${cat.siboTip}</span>
                         </div>
-                        <div class="food-status ${food.status}">
-                            ${food.status === 'safe' ? '✓ 适合' : food.status === 'caution' ? '⚠ 适量' : '✗ 避免'}
-                        </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('')}
+            </div>
+            <div class="not-found-tip">
+                💡 提示：您可以尝试换一个名称搜索，或在「食谱评估」中手动输入食材进行分析。
+                如需添加该食物，请联系开发者。
+            </div>
+        </div>
+    `;
+    return html;
+}
+
+function getAllFoodCount() {
+    let count = 0;
+    for (const cat in foodDatabase) {
+        count += foodDatabase[cat].length;
+    }
+    return count;
+}
+
+// 回车搜索
+document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') searchFood();
+});
+
+// =============================================
+// 食谱评估 - 模式切换
+// =============================================
+function switchRecipeMode(mode) {
+    document.getElementById('modeDish').classList.toggle('active', mode === 'dish');
+    document.getElementById('modeManual').classList.toggle('active', mode === 'manual');
+    document.getElementById('dishMode').style.display = mode === 'dish' ? 'block' : 'none';
+    document.getElementById('manualMode').style.display = mode === 'manual' ? 'block' : 'none';
+    // 隐藏之前的结果
+    document.getElementById('recipeResult').className = 'recipe-result';
+}
+
+// =============================================
+// 菜谱推荐列表
+// =============================================
+function renderRecipeSuggestions() {
+    const container = document.getElementById('recipeSuggestList');
+    const dishNames = Object.keys(recipeDatabase);
+    // 随机选12个推荐
+    const shuffled = dishNames.sort(() => 0.5 - Math.random()).slice(0, 12);
+    container.innerHTML = shuffled.map(name => `
+        <div class="recipe-suggest-item" onclick="quickCheckDish('${name}')">${name}</div>
+    `).join('');
+}
+
+function quickCheckDish(name) {
+    document.getElementById('dishInput').value = name;
+    checkDish();
+}
+
+// =============================================
+// 菜名查询 - 自动分析食材
+// =============================================
+function checkDish() {
+    const dishName = document.getElementById('dishInput').value.trim();
+    const resultDiv = document.getElementById('recipeResult');
+
+    if (!dishName) {
+        alert('请输入菜名');
+        return;
+    }
+
+    // 模糊匹配菜谱
+    let matchedRecipe = null;
+    for (const name in recipeDatabase) {
+        if (name.includes(dishName) || dishName.includes(name)) {
+            matchedRecipe = { name: name, ...recipeDatabase[name] };
+            break;
+        }
+    }
+
+    if (!matchedRecipe) {
+        // 尝试更宽松的匹配
+        const dishChars = dishName.replace(/[的了一是在有和就不人都一上到说们为来这中大个](?:菜|汤|粥|饭|面|饼|肉|鱼|鸡|蛋|虾|排骨|豆腐)/g, '');
+        for (const name in recipeDatabase) {
+            let matchCount = 0;
+            for (const char of dishName) {
+                if (name.includes(char)) matchCount++;
+            }
+            if (matchCount >= 2) {
+                matchedRecipe = { name: name, ...recipeDatabase[name] };
+                break;
             }
         }
+    }
 
-        // 回车搜索
-        document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                searchFood();
+    if (!matchedRecipe) {
+        resultDiv.className = 'recipe-result caution show';
+        document.getElementById('resultTitle').textContent = '🔍 未找到该菜谱';
+        document.getElementById('resultDesc').textContent = `未找到「${dishName}」的菜谱数据。您可以尝试：1）换个菜名搜索；2）使用"手动输入食材"模式直接输入食材。`;
+        document.getElementById('ingredientList').innerHTML = '';
+        return;
+    }
+
+    // 分析食材
+    const analysis = matchedRecipe.ingredients.map(ingredient => {
+        for (const category in foodDatabase) {
+            const food = foodDatabase[category].find(f =>
+                f.name === ingredient ||
+                f.name.toLowerCase().includes(ingredient.toLowerCase()) ||
+                ingredient.toLowerCase().includes(f.name.toLowerCase())
+            );
+            if (food) {
+                return { name: ingredient, status: food.status, matchedName: food.name, desc: food.desc };
             }
-        });
-
-        // 检查食谱
-        function checkRecipe() {
-            const input = document.getElementById('recipeInput').value.trim();
-            const resultDiv = document.getElementById('recipeResult');
-
-            if (!input) {
-                alert('请输入食谱食材');
-                return;
-            }
-
-            // 解析食材
-            const ingredients = input.split(/[，,、\n]+/).map(i => i.trim()).filter(i => i);
-            
-            if (ingredients.length === 0) {
-                alert('请输入有效的食材');
-                return;
-            }
-
-            // 分析每个食材
-            const analysis = ingredients.map(ingredient => {
-                for (const category in foodDatabase) {
-                    const food = foodDatabase[category].find(f => 
-                        f.name.toLowerCase().includes(ingredient.toLowerCase()) ||
-                        ingredient.toLowerCase().includes(f.name.toLowerCase())
-                    );
-                    if (food) {
-                        return {
-                            name: ingredient,
-                            status: food.status,
-                            matchedName: food.name
-                        };
-                    }
-                }
-                return {
-                    name: ingredient,
-                    status: 'unknown',
-                    matchedName: null
-                };
-            });
-
-            // 判断整体结果
-            const hasAvoid = analysis.some(a => a.status === 'avoid');
-            const hasCaution = analysis.some(a => a.status === 'caution');
-            const hasUnknown = analysis.some(a => a.status === 'unknown');
-
-            let overallStatus, title, desc;
-
-            if (hasAvoid) {
-                overallStatus = 'avoid';
-                title = '⚠️ 不建议食用';
-                desc = '食谱中含有SIBO患者应避免的食物，建议调整配方。';
-            } else if (hasCaution) {
-                overallStatus = 'caution';
-                title = '⚡ 适量食用';
-                desc = '食谱整体尚可，但含有需要控制分量的食材，请注意适量。';
-            } else if (hasUnknown) {
-                overallStatus = 'caution';
-                title = '⚡ 基本适合';
-                desc = '已知食材都适合SIBO患者，但含有未识别的食材，请谨慎食用。';
-            } else {
-                overallStatus = 'safe';
-                title = '✅ 适合食用';
-                desc = '恭喜！这个食谱非常适合SIBO患者，可以放心享用。';
-            }
-
-            // 显示结果
-            resultDiv.className = `recipe-result ${overallStatus} show`;
-            document.getElementById('resultTitle').textContent = title;
-            document.getElementById('resultDesc').textContent = desc;
-
-            // 显示食材分析
-            document.getElementById('ingredientList').innerHTML = `
-                <div style="font-weight: 600; margin-bottom: 10px; margin-top: 15px;">食材分析：</div>
-                ${analysis.map(item => `
-                    <div class="ingredient-item">
-                        <div class="ingredient-status ${item.status}"></div>
-                        <span>${item.name} ${item.matchedName ? `(${item.status === 'safe' ? '适合' : item.status === 'caution' ? '适量' : item.status === 'avoid' ? '避免' : '未知'})` : '(未识别)'}</span>
-                    </div>
-                `).join('')}
-            `;
         }
-    </script>
+        return { name: ingredient, status: 'unknown', matchedName: null, desc: '' };
+    });
+
+    const hasAvoid = analysis.some(a => a.status === 'avoid');
+    const hasCaution = analysis.some(a => a.status === 'caution');
+
+    let overallStatus, title, desc;
+    if (hasAvoid) {
+        overallStatus = 'avoid';
+        title = '⚠️ 不建议食用';
+        desc = `「${matchedRecipe.name}」中含有SIBO患者应避免的食材，建议调整配方或选择其他菜品。`;
+    } else if (hasCaution) {
+        overallStatus = 'caution';
+        title = '⚡ 适量食用';
+        desc = `「${matchedRecipe.name}」整体尚可，但含有需要控制分量的食材，请注意适量。`;
+    } else {
+        overallStatus = 'safe';
+        title = '✅ 适合食用';
+        desc = `「${matchedRecipe.name}」非常适合SIBO患者，可以放心享用！`;
+    }
+
+    resultDiv.className = `recipe-result ${overallStatus} show`;
+    document.getElementById('resultTitle').textContent = title;
+    document.getElementById('resultDesc').textContent = `${desc}\n\n📖 ${matchedRecipe.desc}`;
+
+    document.getElementById('ingredientList').innerHTML = `
+        <div style="font-weight: 600; margin-bottom: 10px; margin-top: 15px;">食材分析：</div>
+        ${analysis.map(item => `
+            <div class="ingredient-item">
+                <div class="ingredient-status ${item.status}"></div>
+                <span>${item.name} — ${item.status === 'safe' ? '✓ 适合' : item.status === 'caution' ? '⚠ 适量' : item.status === 'avoid' ? '✗ 避免' : '❓ 未识别'}
+                ${item.desc ? '(' + item.desc + ')' : ''}</span>
+            </div>
+        `).join('')}
+    `;
+}
+
+// 回车搜索菜名
+document.getElementById('dishInput')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') checkDish();
+});
+
+// =============================================
+// 手动输入食材评估
+// =============================================
+function checkRecipe() {
+    const input = document.getElementById('recipeInput').value.trim();
+    const resultDiv = document.getElementById('recipeResult');
+
+    if (!input) { alert('请输入食谱食材'); return; }
+
+    const ingredients = input.split(/[，,、\n]+/).map(i => i.trim()).filter(i => i);
+    if (ingredients.length === 0) { alert('请输入有效的食材'); return; }
+
+    const analysis = ingredients.map(ingredient => {
+        for (const category in foodDatabase) {
+            const food = foodDatabase[category].find(f =>
+                f.name.toLowerCase().includes(ingredient.toLowerCase()) ||
+                ingredient.toLowerCase().includes(f.name.toLowerCase())
+            );
+            if (food) {
+                return { name: ingredient, status: food.status, matchedName: food.name, desc: food.desc };
+            }
+        }
+        return { name: ingredient, status: 'unknown', matchedName: null, desc: '' };
+    });
+
+    const hasAvoid = analysis.some(a => a.status === 'avoid');
+    const hasCaution = analysis.some(a => a.status === 'caution');
+    const hasUnknown = analysis.some(a => a.status === 'unknown');
+
+    let overallStatus, title, desc;
+    if (hasAvoid) {
+        overallStatus = 'avoid';
+        title = '⚠️ 不建议食用';
+        desc = '食谱中含有SIBO患者应避免的食物，建议调整配方。';
+    } else if (hasCaution) {
+        overallStatus = 'caution';
+        title = '⚡ 适量食用';
+        desc = '食谱整体尚可，但含有需要控制分量的食材，请注意适量。';
+    } else if (hasUnknown) {
+        overallStatus = 'caution';
+        title = '⚡ 基本适合';
+        desc = '已知食材都适合SIBO患者，但含有未识别的食材，请谨慎食用。';
+    } else {
+        overallStatus = 'safe';
+        title = '✅ 适合食用';
+        desc = '恭喜！这个食谱非常适合SIBO患者，可以放心享用。';
+    }
+
+    resultDiv.className = `recipe-result ${overallStatus} show`;
+    document.getElementById('resultTitle').textContent = title;
+    document.getElementById('resultDesc').textContent = desc;
+
+    document.getElementById('ingredientList').innerHTML = `
+        <div style="font-weight: 600; margin-bottom: 10px; margin-top: 15px;">食材分析：</div>
+        ${analysis.map(item => `
+            <div class="ingredient-item">
+                <div class="ingredient-status ${item.status}"></div>
+                <span>${item.name} — ${item.status === 'safe' ? '✓ 适合' : item.status === 'caution' ? '⚠ 适量' : item.status === 'avoid' ? '✗ 避免' : '❓ 未识别'}
+                ${item.desc ? '(' + item.desc + ')' : ''}</span>
+            </div>
+        `).join('')}
+    `;
+}
+
+// =============================================
+// 热量查询功能
+// =============================================
+function searchCalorie() {
+    const keyword = document.getElementById('calorieInput').value.trim();
+    const resultCard = document.getElementById('calorieResultCard');
+    const listContainer = document.getElementById('calorieListContainer');
+
+    if (!keyword) { renderCalorieRank(); return; }
+
+    const results = [];
+    for (const category in foodDatabase) {
+        const foods = foodDatabase[category];
+        const matched = foods.filter(food =>
+            food.name.toLowerCase().includes(keyword.toLowerCase()) ||
+            keyword.toLowerCase().includes(food.name.toLowerCase())
+        );
+        results.push(...matched);
+    }
+
+    if (results.length === 0) {
+        resultCard.className = 'calorie-result-card';
+        listContainer.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon">🔍</div>
+                <div class="empty-state-text">未找到「${keyword}」的热量数据</div>
+            </div>
+        `;
+        return;
+    }
+
+    // 显示第一个匹配结果的详细信息
+    const food = results[0];
+    const maxCalorie = 800;
+    const percent = Math.min((food.calorie / maxCalorie) * 100, 100);
+
+    resultCard.className = 'calorie-result-card show';
+    resultCard.innerHTML = `
+        <div style="display:flex; align-items:center; gap: 12px; margin-bottom: 10px;">
+            <span style="font-size: 36px;">${food.icon}</span>
+            <div>
+                <div style="font-size: 20px; font-weight: 600;">${food.name}</div>
+                <div style="font-size: 13px; opacity: 0.9;">${food.desc}</div>
+            </div>
+        </div>
+        <div class="calorie-value">${food.calorie}</div>
+        <div class="calorie-unit">千卡 / 100克</div>
+        <div class="calorie-bar-bg"><div class="calorie-bar" style="width: ${percent}%"></div></div>
+        <div class="calorie-detail">
+            SIBO评级：${food.status === 'safe' ? '✅ 适合食用' : food.status === 'caution' ? '⚠️ 适量食用' : '❌ 避免食用'}<br>
+            热量等级：${food.calorie < 50 ? '🟢 低热量' : food.calorie < 200 ? '🟡 中等热量' : food.calorie < 400 ? '🟠 较高热量' : '🔴 高热量'}
+        </div>
+    `;
+
+    // 如果有多个结果，显示列表
+    if (results.length > 1) {
+        listContainer.innerHTML = `
+            <div style="font-size: 14px; font-weight: 600; color: #333; margin: 15px 0 10px;">其他匹配结果：</div>
+            ${results.slice(1).map(f => `
+                <div class="calorie-list-item">
+                    <div class="calorie-list-icon">${f.icon}</div>
+                    <div class="calorie-list-info">
+                        <div class="calorie-list-name">${f.name}</div>
+                        <div class="calorie-list-desc">${f.desc}</div>
+                    </div>
+                    <div class="calorie-list-value">${f.calorie} kcal</div>
+                </div>
+            `).join('')}
+        `;
+    } else {
+        listContainer.innerHTML = '';
+    }
+}
+
+// 回车搜索热量
+document.getElementById('calorieInput')?.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') searchCalorie();
+});
+
+// =============================================
+// 热量排行榜
+// =============================================
+function renderCalorieRank() {
+    const container = document.getElementById('calorieRankContainer');
+    const resultCard = document.getElementById('calorieResultCard');
+    resultCard.className = 'calorie-result-card';
+
+    // 收集所有食物并按热量排序
+    const allFoods = [];
+    for (const category in foodDatabase) {
+        foodDatabase[category].forEach(f => allFoods.push(f));
+    }
+    allFoods.sort((a, b) => b.calorie - a.calorie);
+
+    const top15 = allFoods.slice(0, 15);
+    container.innerHTML = top15.map((f, i) => `
+        <div class="calorie-list-item">
+            <div class="calorie-list-icon">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : f.icon}</div>
+            <div class="calorie-list-info">
+                <div class="calorie-list-name">${f.name}</div>
+                <div class="calorie-list-desc">${f.desc}</div>
+            </div>
+            <div class="calorie-list-value">${f.calorie} kcal</div>
+        </div>
+    `).join('');
+}
+</script>
 </body>
 </html>
